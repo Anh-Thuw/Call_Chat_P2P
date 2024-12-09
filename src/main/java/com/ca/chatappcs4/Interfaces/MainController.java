@@ -251,7 +251,7 @@ public class MainController  implements Initializable
                         break;
                     // 3=> means he wants to talk to me on a video call
                     case 3:
-                        new VedioCall(chat,ois).run() ;
+                       // new VedioCall(chat,ois).run() ;
                         break;
                     case 4:
                         new AudioCall(chat).run();
@@ -1049,6 +1049,8 @@ public class MainController  implements Initializable
 
     @FXML
     private JFXButton vedioCallBtn;
+    private ImageView user2 ;
+    private ImageView myimage ;
 
     @FXML
     void VedioCall(ActionEvent event) throws IOException
@@ -1071,7 +1073,7 @@ public class MainController  implements Initializable
         imageView.setFitWidth(550);
         imageView.setFitHeight(300);
 
-        ImageView myimage = new ImageView() ;
+        myimage = new ImageView() ;
         myimage.setX(115);
         myimage.setY(30);
 
@@ -1110,6 +1112,7 @@ public class MainController  implements Initializable
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
+
         Thread sendVideo = new Thread(()->
         {
             BufferedImage bufferedImage;
@@ -1141,7 +1144,7 @@ public class MainController  implements Initializable
         });
 
         /*---------------------------------------Recive THread------------------------------*/
-        /*Thread reciveThread = new Thread(()->
+        Thread reciveThread = new Thread(()->
         {
             BufferedImage bufferedImage;
             while (VedioCalling)
@@ -1174,7 +1177,7 @@ public class MainController  implements Initializable
                 e.printStackTrace();
             }
         });
-        reciveThread.start();*/
+        reciveThread.start();
         sendVideo.start();
         /*----------------------------------------------------------------------------*/
     }
