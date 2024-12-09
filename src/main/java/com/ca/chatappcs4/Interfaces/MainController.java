@@ -554,7 +554,7 @@ public class MainController  implements Initializable
             }
             else
             {
-                if (status.equals("En Ligne"))
+                if (status.equals("Online"))
                 {
                     try
                     {
@@ -808,7 +808,7 @@ public class MainController  implements Initializable
         try
         {
             User u = (User) ois.readObject();
-            if (u.getStatus().equals("En Ligne"))
+            if (u.getStatus().equals("Online"))
             {
                 portUser2 = u.getPort() ;
                 ipUser2 = u.getIp() ;
@@ -1051,6 +1051,7 @@ public class MainController  implements Initializable
     private JFXButton vedioCallBtn;
     ImageView myimage ;
     ImageView user2 ;
+    JFXButton btnEnd , audioCallBtn ;
 
     @FXML
     void VedioCall(ActionEvent event) throws IOException
@@ -1087,20 +1088,32 @@ public class MainController  implements Initializable
         user2.setFitWidth(200);
         user2.setFitHeight(150);
 
-        Text endCall = GlyphsDude.createIcon(FontAwesomeIconName.PHONE,"2em") ;
+        // End Call Button
+        Text endCall = GlyphsDude.createIcon(FontAwesomeIconName.PHONE, "2em");
         endCall.setFill(Color.WHITE);
-        JFXButton button = new JFXButton() ;
+        btnEnd = new JFXButton();
+        btnEnd.setStyle("-fx-background-color: #E9505B; -fx-background-radius: 20px");
+        btnEnd.setPrefSize(50, 50);
+        btnEnd.setGraphic(endCall);
+        btnEnd.setLayoutX(250);
+        btnEnd.setLayoutY(235);
 
+        // Audio Call Button
+        audioCallBtn = new JFXButton("Audio Call");
+        audioCallBtn.setStyle("-fx-background-color: #4CAF50; -fx-background-radius: 20px; -fx-text-fill: white;");
+        audioCallBtn.setPrefSize(100, 40);
+        audioCallBtn.setLayoutX(400);
+        audioCallBtn.setLayoutY(235);
+        audioCallBtn.setOnMouseClicked(e -> {
+            try {
+                AudioCall(new ActionEvent());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
 
-        button.setStyle("-fx-background-color: #E9505B ; -fx-background-radius: 20px");
-        button.setPrefSize(50,50);
-        pane.setStyle("-fx-background-radius: 45px ; -fx-background-color: transparent");
-
-        button.setGraphic(endCall);
-        button.setLayoutX(250);
-        button.setLayoutY(235);
-        //pane.getChildren().addAll(imageView,myimage,button) ;
-        pane.getChildren().addAll(imageView, myimage, user2, button);
+        pane.setStyle("-fx-background-radius: 45px; -fx-background-color: transparent");
+        pane.getChildren().addAll(imageView, myimage, user2, btnEnd , audioCallBtn);
 
 
         final Dimension size = WebcamResolution.QVGA.getSize();
@@ -1108,7 +1121,7 @@ public class MainController  implements Initializable
         webcam.setViewSize(size);
 
         webcam.open();
-        button.setOnMouseClicked(e ->
+        btnEnd.setOnMouseClicked(e ->
         {
             VedioCalling=false ;
             primaryStage.close();
@@ -1200,6 +1213,8 @@ public class MainController  implements Initializable
         ObjectOutputStream objectOutputStream ;
         ImageView myimage ;
         ImageView user2 ;
+        JFXButton btnEnd , audioCallBtn ;
+
         Stage primaryStage ;
         //  final Dimension size  = WebcamResolution.QVGA.getSize();
         Webcam webcam = Webcam.getDefault();
@@ -1258,28 +1273,39 @@ public class MainController  implements Initializable
                 user2.setFitHeight(150);
 
 
-                Text endCall = GlyphsDude.createIcon(FontAwesomeIconName.PHONE,"2em") ;
+                // End Call Button
+                Text endCall = GlyphsDude.createIcon(FontAwesomeIconName.PHONE, "2em");
                 endCall.setFill(Color.WHITE);
-                JFXButton button = new JFXButton() ;
-
-
-                button.setStyle("-fx-background-color: #E9505B ; -fx-background-radius: 20px");
-                button.setPrefSize(50,50);
-                pane.setStyle("-fx-background-radius: 45px ; -fx-background-color: transparent");
-
-                button.setGraphic(endCall);
-                button.setLayoutX(250);
-                button.setLayoutY(235   );
-                //pane.getChildren().addAll(imageView,user2,button) ;
-                pane.getChildren().addAll(imageView, myimage, user2, button);
-
-
-                button.setOnMouseClicked(e ->
+                btnEnd = new JFXButton();
+                btnEnd.setStyle("-fx-background-color: #E9505B; -fx-background-radius: 20px");
+                btnEnd.setPrefSize(50, 50);
+                btnEnd.setGraphic(endCall);
+                btnEnd.setLayoutX(250);
+                btnEnd.setLayoutY(235);
+                btnEnd.setOnMouseClicked(e ->
                 {
                     VedioCalling=false ;
                     primaryStage.close();
                     webcam.close() ;
                 });
+
+                // Audio Call Button
+                audioCallBtn = new JFXButton("Audio Call");
+                audioCallBtn.setStyle("-fx-background-color: #4CAF50; -fx-background-radius: 20px; -fx-text-fill: white;");
+                audioCallBtn.setPrefSize(100, 40);
+                audioCallBtn.setLayoutX(400);
+                audioCallBtn.setLayoutY(235);
+                audioCallBtn.setOnMouseClicked(e -> {
+                    try {
+                        AudioCall(new ActionEvent());
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+
+
+                pane.setStyle("-fx-background-radius: 45px; -fx-background-color: transparent");
+                pane.getChildren().addAll(imageView, myimage, user2, btnEnd, audioCallBtn);
 
 
                 primaryStage.setTitle("Hello World");

@@ -187,8 +187,8 @@ public class CennectionClass {
         try {
             connection = getConnection();
             Statement statement = connection.createStatement();
-            statement.executeUpdate("UPDATE users SET status ='En Ligne' WHERE username = '" + cond + "'");
-            statement.executeUpdate("UPDATE annuair SET status ='En Ligne' WHERE username = '" + cond + "'");
+            statement.executeUpdate("UPDATE users SET status ='Online' WHERE username = '" + cond + "'");
+            statement.executeUpdate("UPDATE annuair SET status ='Online' WHERE username = '" + cond + "'");
 
         } catch (SQLException e) {
             e.printStackTrace();
