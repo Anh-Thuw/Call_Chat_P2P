@@ -488,7 +488,7 @@ public class MainController  implements Initializable
             return;
         }
         else
-            {
+        {
             String name = fileName.getCellData(indexF);
 
             if (peerName.getCellData(indexF).equals(username))
@@ -503,13 +503,13 @@ public class MainController  implements Initializable
                     if (reponse.equals("false"))
                     {
                         JOptionPane.showMessageDialog(null, "The file was successfully deleted ",
-                            "Success", JOptionPane.INFORMATION_MESSAGE);
+                                "Success", JOptionPane.INFORMATION_MESSAGE);
                     }
                     else
-                        {
-                            JOptionPane.showMessageDialog(null, "Something wrong , the file is not delete !",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                        }
+                    {
+                        JOptionPane.showMessageDialog(null, "Something wrong , the file is not delete !",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 catch (IOException e)
                 {
@@ -518,11 +518,11 @@ public class MainController  implements Initializable
 
             }
             else
-                {
-                    JOptionPane.showMessageDialog(null, "You cannot delete this file," +
+            {
+                JOptionPane.showMessageDialog(null, "You cannot delete this file," +
                                 " you are not the owner !?",
                         "Error", JOptionPane.ERROR_MESSAGE);
-                }
+            }
         }
         Update();
         setStatistque();
@@ -537,7 +537,7 @@ public class MainController  implements Initializable
             return;
         }
         else
-            {
+        {
             String name = fileName.getCellData(indexF);
             System.out.println("aaa"+peerName.getCellData(indexF));
             String ip = ipAddress.getCellData(indexF);
@@ -553,63 +553,63 @@ public class MainController  implements Initializable
                         "Information", JOptionPane.INFORMATION_MESSAGE);
             }
             else
+            {
+                if (status.equals("En Ligne"))
                 {
-                    if (status.equals("En Ligne"))
+                    try
                     {
-                        try
+                        JFileChooser fileChooser = new JFileChooser();
+                        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                        fileChooser.showSaveDialog(null);
+                        String path = String.valueOf(fileChooser.getSelectedFile());
+                        File f = new File(path + "/" + name);
+                        System.out.println("Path where i save" + f.getAbsolutePath());
+                        File filedownload = new File(file) ;
+
+
+                        chatSocket = new Socket();
+                        chatSocket.connect(new InetSocketAddress(ip, port), 5000);
+
+                        byte[] bytes = new byte[16 * 1024];
+
+
+                        PrintWriter printWriter = new PrintWriter(chatSocket.getOutputStream(), true);
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(chatSocket.getOutputStream()) ;
+
+                        OutputStream out = new FileOutputStream(f);
+
+
+                        objectOutputStream.writeObject(1); //send request code 1==> mean download file
+                        //printWriter.println(file);//Send Path file to Peer server to download
+                        objectOutputStream.writeObject(filedownload);
+
+                        System.out.println("file to downnload" + filedownload.getAbsolutePath());
+                        int count;
+                        InputStream inputStream = chatSocket.getInputStream();
+                        while ((count = inputStream.read(bytes)) > 0)
                         {
-                            JFileChooser fileChooser = new JFileChooser();
-                            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                            fileChooser.showSaveDialog(null);
-                            String path = String.valueOf(fileChooser.getSelectedFile());
-                            File f = new File(path + "/" + name);
-                            System.out.println("Path where i save" + f.getAbsolutePath());
-                            File filedownload = new File(file) ;
-
-
-                            chatSocket = new Socket();
-                            chatSocket.connect(new InetSocketAddress(ip, port), 5000);
-
-                            byte[] bytes = new byte[16 * 1024];
-
-
-                            PrintWriter printWriter = new PrintWriter(chatSocket.getOutputStream(), true);
-                            ObjectOutputStream objectOutputStream = new ObjectOutputStream(chatSocket.getOutputStream()) ;
-
-                            OutputStream out = new FileOutputStream(f);
-
-
-                            objectOutputStream.writeObject(1); //send request code 1==> mean download file
-                            //printWriter.println(file);//Send Path file to Peer server to download
-                            objectOutputStream.writeObject(filedownload);
-
-                            System.out.println("file to downnload" + filedownload.getAbsolutePath());
-                            int count;
-                            InputStream inputStream = chatSocket.getInputStream();
-                            while ((count = inputStream.read(bytes)) > 0)
-                            {
-                                out.write(bytes, 0, count);
-                            }
-                            out.close();
-                            chatSocket.close();
-                            showToast();
-
-                            //Add the resource to the "annuair"
-                            pw.println(4);
-                            oos.writeObject(f);
-                            pw.println(username);
-
+                            out.write(bytes, 0, count);
                         }
-                        catch (IOException e)
-                        {
-                            System.out.println(e.getMessage());
-                        }
+                        out.close();
+                        chatSocket.close();
+                        showToast();
+
+                        //Add the resource to the "annuair"
+                        pw.println(4);
+                        oos.writeObject(f);
+                        pw.println(username);
+
                     }
-                    else
-                        {
-                            JOptionPane.showMessageDialog(null, "You can't download the file Peer is offline !",
+                    catch (IOException e)
+                    {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "You can't download the file Peer is offline !",
                             "Error", JOptionPane.ERROR_MESSAGE);
-                        }
+                }
             }
 
         }
@@ -1189,16 +1189,18 @@ public class MainController  implements Initializable
         ImageView myimage ;
         ImageView user2 ;
         Stage primaryStage ;
-        final Dimension size  = WebcamResolution.QVGA.getSize();
+        //  final Dimension size  = WebcamResolution.QVGA.getSize();
         Webcam webcam = Webcam.getDefault();
 
 
         public VedioCall(Socket s,ObjectInputStream ois ) throws IOException
         {
-            System.out.println("from constactor ");
             this.s = s;
-            this.ois = ois ;
-            objectOutputStream = new ObjectOutputStream(s.getOutputStream()) ;
+            this.ois = ois;
+            this.objectOutputStream = new ObjectOutputStream(s.getOutputStream());
+            this.webcam = Webcam.getDefault();
+            this.webcam.setViewSize(WebcamResolution.QVGA.getSize());
+            this.webcam.open();
 
         }
 
@@ -1217,9 +1219,11 @@ public class MainController  implements Initializable
 
             Platform.runLater(()->
             {
-                webcam.setViewSize(size);
-
-                webcam.open();
+//                if (webcam.isOpen()) {
+//                    webcam.close();
+//                }
+//                webcam.setViewSize(size);
+//                webcam.open();
 
                 primaryStage = new Stage() ;
                 Pane pane =  new Pane() ;
@@ -1227,10 +1231,19 @@ public class MainController  implements Initializable
                 imageView.setFitWidth(550);
                 imageView.setFitHeight(300);
 
+                // Your video
+                myimage = new ImageView();
+                myimage.setX(50);
+                myimage.setY(30);
+                myimage.setFitWidth(200);
+                myimage.setFitHeight(150);
 
-                user2 = new ImageView() ;
-                user2.setX(115);
+                // User2's video
+                user2 = new ImageView();
+                user2.setX(300);
                 user2.setY(30);
+                user2.setFitWidth(200);
+                user2.setFitHeight(150);
 
 
                 Text endCall = GlyphsDude.createIcon(FontAwesomeIconName.PHONE,"2em") ;
@@ -1246,7 +1259,7 @@ public class MainController  implements Initializable
                 button.setLayoutX(250);
                 button.setLayoutY(235   );
                 //pane.getChildren().addAll(imageView,user2,button) ;
-                pane.getChildren().addAll(imageView,user2,button) ;
+                pane.getChildren().addAll(imageView, myimage, user2, button);
 
 
                 button.setOnMouseClicked(e ->
@@ -1268,30 +1281,38 @@ public class MainController  implements Initializable
 
             Thread sendVideo = new Thread(()->
             {
-                final Dimension size = WebcamResolution.QVGA.getSize();
-                Webcam webcam = Webcam.getDefault();
-                webcam.setViewSize(size);
-                webcam.open();
+//                final Dimension size = WebcamResolution.QVGA.getSize();
+//                Webcam webcam = Webcam.getDefault();
+//                webcam.setViewSize(size);
+//                webcam.open();
                 BufferedImage bufferedImage;
                 while (VedioCalling)
                 {
                     ImageIcon ic;
                     bufferedImage = webcam.getImage();
-                    //Image picture = SwingFXUtils.toFXImage(bufferedImage,null);
-                    //myimage.setImage(picture);
+                    if (bufferedImage == null) {
+                        System.err.println("Webcam image is null");
+                        continue;
+                    }
+                    Image picture = SwingFXUtils.toFXImage(bufferedImage, null);
+                    Platform.runLater(() -> myimage.setImage(picture));
                     ic = new ImageIcon(bufferedImage);
                     try
                     {
                         objectOutputStream.writeObject(ic);
+                        Thread.sleep(33);
                     }
                     catch (IOException e)
                     {
                         VedioCalling = false ;
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
+
                 }
                 try {
                     s.close();
-                     Platform.runLater(()->{
+                    Platform.runLater(()->{
                         primaryStage.close();
                         webcam.close() ;
                     });
@@ -1309,6 +1330,10 @@ public class MainController  implements Initializable
                     try
                     {
                         ic = (ImageIcon) ois.readObject();
+                        if (ic == null || ic.getImageLoadStatus() != MediaTracker.COMPLETE) {
+                            System.err.println("Received ImageIcon is null or incomplete");
+                            continue; // Bỏ qua khung hình hiện tại
+                        }
                         bufferedImage = new BufferedImage(ic.getIconWidth(),ic.getIconHeight(),BufferedImage.TYPE_INT_RGB) ;
                         Graphics g = bufferedImage.createGraphics() ;
                         ic.paintIcon(null,g,0,0);
@@ -1541,7 +1566,7 @@ public class MainController  implements Initializable
                 primaryStage.setX(80);
                 primaryStage.setY(100);
                 primaryStage.show();
-                 Thread reciveVoice = new Thread(() -> {
+                Thread reciveVoice = new Thread(() -> {
                     iniAudioServer(MyPort);
                 });
                 reciveVoice.start();
@@ -1556,12 +1581,12 @@ public class MainController  implements Initializable
 
     public static AudioFormat getaudioFormat()
     {
-    float simpleRate = 8000.0F ;
-    int simpleSireInbits = 8 ;
-    int channel = 1 ;
-    boolean signed = true ;
-    boolean bigIndian = false ;
-    return new AudioFormat(simpleRate,simpleSireInbits,channel,signed,bigIndian) ;
+        float simpleRate = 8000.0F ;
+        int simpleSireInbits = 8 ;
+        int channel = 1 ;
+        boolean signed = true ;
+        boolean bigIndian = false ;
+        return new AudioFormat(simpleRate,simpleSireInbits,channel,signed,bigIndian) ;
     }
     TargetDataLine  audio_in ;
     public static boolean Calling = false ;
