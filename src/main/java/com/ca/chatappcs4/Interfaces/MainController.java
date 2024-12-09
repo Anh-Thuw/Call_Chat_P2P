@@ -102,14 +102,14 @@ public class MainController  implements Initializable
     }
     public void  setStatistque()
     {
-        Vector<file> files = count();
-        XYChart.Series set1 = new XYChart.Series<>();
-        for (int i=0;i<files.size();i++)
-        {
-            set1.getData().add(new XYChart.Data<>(files.get(i).getFile(),files.get(i).getCount())) ;
-        }
-        barChartFile.getData().clear() ;
-        barChartFile.getData().addAll(set1) ;
+//        Vector<file> files = count();
+//        XYChart.Series set1 = new XYChart.Series<>();
+//        for (int i=0;i<files.size();i++)
+//        {
+//            set1.getData().add(new XYChart.Data<>(files.get(i).getFile(),files.get(i).getCount())) ;
+//        }
+//        barChartFile.getData().clear() ;
+//        barChartFile.getData().addAll(set1) ;
 
         nombreUser.setText(countUsers()+" Peer");
         nombreRess.setText(countRess()+" Resource");

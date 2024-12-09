@@ -31,14 +31,14 @@
    <children>
       <Pane fx:id="HomePane" layoutX="64.0" layoutY="48.0" prefHeight="558.0" prefWidth="772.0" style="-fx-background-radius: 20;" styleClass="PaneMain" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="48.0">
          <children>
-                  <BarChart fx:id="barChartFile" layoutX="7.0" layoutY="215.0" legendSide="RIGHT" legendVisible="false" prefHeight="333.0" prefWidth="747.0" title="Ressources Répliquer">
-                    <xAxis>
-                      <CategoryAxis label="Ressources" onMouseEntered="#popover" side="BOTTOM" tickLabelGap="5.0" tickLength="4.0" fx:id="x" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis fx:id="y" label="Répétition" side="LEFT" upperBound="10.0" />
-                    </yAxis>
-                  </BarChart>
+<!--                  <BarChart fx:id="barChartFile" layoutX="7.0" layoutY="215.0" legendSide="RIGHT" legendVisible="false" prefHeight="333.0" prefWidth="747.0" title="">-->
+<!--                    <xAxis>-->
+<!--                      <CategoryAxis label="" onMouseEntered="#popover" side="BOTTOM" tickLabelGap="5.0" tickLength="4.0" fx:id="x" />-->
+<!--                    </xAxis>-->
+<!--                    <yAxis>-->
+<!--                      <NumberAxis fx:id="y" label="" side="LEFT" upperBound="10.0" />-->
+<!--                    </yAxis>-->
+<!--                  </BarChart>-->
                   <Pane fx:id="ProduitIndicatNbr" layoutX="67.0" layoutY="48.0" prefHeight="100.0" prefWidth="163.0" styleClass="paneHome">
                      <children>
                         <ImageView fitHeight="56.0" fitWidth="59.0" layoutX="54.0" layoutY="-27.0" pickOnBounds="true" preserveRatio="true">
