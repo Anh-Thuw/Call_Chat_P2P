@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<StackPane fx:controller="com.ca.chatappcs4.Interfaces.signUpController" fx:id="rootStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #d3d3d3;">
+    <children>
+        <VBox alignment="CENTER" spacing="20.0" prefWidth="600.0" prefHeight="450.0" style="-fx-padding: 20;">
+            <children>
+                <!-- Title -->
+                <Label text="MEET TEAM - REGISTER" textAlignment="CENTER" textFill="#000080" style="-fx-font-weight: bold;">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+
+                <!-- Username Row -->
+                <HBox spacing="10.0" prefWidth="500.0" alignment="CENTER">
+                    <children>
+                        <Label text="Tên đăng nhập:" textFill="#000000" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-size: 16;" />
+                        <TextField fx:id="usernameTextField" prefHeight="30.0" prefWidth="300.0" promptText="Nhập tên đăng nhập" style="-fx-font-size: 16;" />
+                    </children>
+                </HBox>
+
+                <!-- Email Row -->
+                <HBox spacing="10.0" prefWidth="500.0" alignment="CENTER">
+                    <children>
+                        <Label text="Email:" textFill="#000000" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-size: 16;" />
+                        <TextField fx:id="emailTextField" prefHeight="30.0" prefWidth="300.0" promptText="Nhập email" style="-fx-font-size: 16;" />
+                    </children>
+                </HBox>
+
+                <!-- Password Row -->
+                <HBox alignment="CENTER" spacing="10.0" prefWidth="500.0">
+                    <children>
+                        <Label text="Mật khẩu:" textFill="#000000" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-size: 16;" />
+                        <!-- StackPane để chồng 2 ô TextField và PasswordField -->
+                        <StackPane>
+                            <children>
+                                <PasswordField fx:id="passwordTextField" prefHeight="30.0" prefWidth="300.0" promptText="Nhập mật khẩu" style="-fx-font-size: 16;" visible="true" />
+                                <TextField fx:id="textPasswordField" prefHeight="30.0" prefWidth="300.0" promptText="Nhập mật khẩu" style="-fx-font-size: 16;" visible="false" />
+                            </children>
+                        </StackPane>
+                    </children>
+                </HBox>
+
+                <!-- Show Password Checkbox -->
+                <CheckBox fx:id="showPassCheckBox" onAction="#showPassword" text="Show Password" textFill="BLACK" style="-fx-font-size: 14;" />
+
+                <!-- Buttons Row (Back, Clear, Register, and Settings) -->
+                <HBox spacing="10.0" alignment="CENTER">
+                    <children>
+                        <!-- Back Button -->
+                        <Button onAction="#Back" prefHeight="40.0" prefWidth="120.0" text="Quay lại" style="-fx-background-color: #DC143C; -fx-text-fill: white; -fx-font-size: 16;" />
+
+                        <!-- Clear Button -->
+                        <Button onAction="#Clear" prefHeight="40.0" prefWidth="120.0" text="Clear" style="-fx-background-color: #32CD32; -fx-text-fill: white; -fx-font-size: 16;" />
+
+                        <!-- Register Button -->
+                        <Button onAction="#SignUp" prefHeight="40.0" prefWidth="120.0" text="Đăng kí" style="-fx-background-color: #4682B4; -fx-text-fill: white; -fx-font-size: 16;" />
+
+                        <!-- Settings Button -->
+                        <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#Setting" prefHeight="44.0" prefWidth="70.0" text=" " style="-fx-background-color: transparent; -fx-padding: 0; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 5, 0.5, 1, 1);">
+                            <graphic>
+                                <FontAwesomeIcon fill="WHITE" iconName="COG" size="2em" />
+                            </graphic>
+                        </JFXButton>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</StackPane>

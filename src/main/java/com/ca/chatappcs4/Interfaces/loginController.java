@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -13,8 +14,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
@@ -30,21 +35,33 @@ public class loginController
     ObjectOutputStream oos;
     ObjectInputStream ois ;
 
+    @FXML
+    private TextField usernameTextField;
 
     @FXML
-    private JFXTextField usernameTextField;
+    private PasswordField passwordTextField;
 
     @FXML
-    private JFXPasswordField passwordTextField;
+    private CheckBox showPassCheckBox;
 
     @FXML
-    private JFXCheckBox showPassCheckBox;
+    private TextField textPasswordField;  // Trường TextField cho mật khẩu rõ
 
     @FXML
-    private JFXTextField passTextField;
-    @FXML
-    private StackPane rootStackPane ;
+    private void open_signup(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ca/chatappcs4/FXML/DangKi.fxml"));
+            Parent signupRoot = loader.load();
 
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(signupRoot);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @FXML
@@ -129,28 +146,19 @@ public class loginController
 
     }
     /*---------------------------------------------------------------------------------------------------*/
-    public void showPassword()
-    {
-        if (showPassCheckBox.isSelected())
-        {
-            if (!passwordTextField.getText().isEmpty())
-            {
-                passTextField.setText(passwordTextField.getText());
-            }
-            passTextField.setVisible(true);
+
+    public void showPassword() {
+        if (showPassCheckBox.isSelected()) {
+            textPasswordField.setText(passwordTextField.getText());
+            textPasswordField.setVisible(true);
             passwordTextField.setVisible(false);
-        }
-        else
-        {
-            if (!passTextField.getText().isEmpty())
-            {
-                passwordTextField.setText(passTextField.getText());
-            }
-
+        } else {
+            passwordTextField.setText(textPasswordField.getText());
             passwordTextField.setVisible(true);
-            passTextField.setVisible(false);
+            textPasswordField.setVisible(false);
         }
-
     }
+
+
 
 }

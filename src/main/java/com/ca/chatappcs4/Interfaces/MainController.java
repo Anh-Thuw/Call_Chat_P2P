@@ -51,15 +51,6 @@ import java.util.Vector;
 
 public class MainController  implements Initializable
 {
-
-    /*******************************************************************************************************************
-     *                                                                                                                 *
-     *                                                   Common stuff                                                  *
-     *                                                                                                                 *
-     ******************************************************************************************************************/
-
-    /*-----------Declaration of common variables -----------------*/
-
     public static Socket connectionSocket;
 
     public static ObjectOutputStream oos;
@@ -75,9 +66,6 @@ public class MainController  implements Initializable
 //    AudioClip clipMessageNotif = new AudioClip(src.toString()) ;
 //    URL src2 =getClass().getResource("request.mp3") ;
 //    AudioClip clipRequestNotif = new AudioClip(src2.toString()) ;
-
-
-
 
     /*-------FXML component---------*/
     @FXML
@@ -210,7 +198,6 @@ public class MainController  implements Initializable
 
         public conversation(Socket chat)
         {
-
             this.chat = chat;
         }
 
@@ -1232,7 +1219,7 @@ public class MainController  implements Initializable
             {
                 webcam.setViewSize(size);
 
-                //webcam.open();
+                webcam.open();
 
                 primaryStage = new Stage() ;
                 Pane pane =  new Pane() ;
@@ -1266,7 +1253,7 @@ public class MainController  implements Initializable
                 {
                     VedioCalling=false ;
                     primaryStage.close();
-                    //webcam.close() ;
+                    webcam.close() ;
                 });
 
 
@@ -1279,7 +1266,7 @@ public class MainController  implements Initializable
 
             });
 
-            /*Thread sendVideo = new Thread(()->
+            Thread sendVideo = new Thread(()->
             {
                 final Dimension size = WebcamResolution.QVGA.getSize();
                 Webcam webcam = Webcam.getDefault();
@@ -1311,7 +1298,7 @@ public class MainController  implements Initializable
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            });*/
+            });
             Thread reciveVideo = new Thread(()->
             {
                 BufferedImage bufferedImage;
@@ -1345,7 +1332,7 @@ public class MainController  implements Initializable
                     e.printStackTrace();
                 }
             });
-            //sendVideo.start();
+            sendVideo.start();
             reciveVideo.start();
         }
     }

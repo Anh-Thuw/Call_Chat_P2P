@@ -319,7 +319,8 @@
                   <Image url="@../image/manager.png" />
                </image>
             </ImageView>
-            <Label fx:id="userFentre" layoutX="483.0" layoutY="4.0" prefHeight="41.0" prefWidth="228.0" textFill="WHITE" />
+            <Label fx:id="userFentre" layoutX="483.0" layoutY=
+                    "4.0" prefHeight="41.0" prefWidth="228.0" textFill="WHITE" />
             <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="19.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/Logo.jpg" />

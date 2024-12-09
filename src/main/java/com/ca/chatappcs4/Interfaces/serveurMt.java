@@ -28,7 +28,7 @@ public class serveurMt extends Thread
         try
         {
             ServerSocket ss =new ServerSocket(9191) ;
-            System.out.println("Démarage de Serveur ......");
+            System.out.println("Start the server");
 
             while (true)
             {

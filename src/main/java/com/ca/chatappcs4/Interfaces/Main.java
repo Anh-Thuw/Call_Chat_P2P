@@ -18,7 +18,7 @@ public class Main extends Application {
     {
 //        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("./org/example/chatapp/FXML/Login.fxml")));
 //        Scene scene = new Scene(root);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/ca/chatappcs4/FXML/Login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/ca/chatappcs4/FXML/Dangnhap.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(scene);

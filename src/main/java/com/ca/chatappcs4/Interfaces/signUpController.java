@@ -7,14 +7,18 @@ import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconName;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
@@ -27,19 +31,19 @@ public class signUpController
 {
 
     @FXML
-    private JFXTextField usernameTextField;
+    private TextField usernameTextField;
 
     @FXML
-    private JFXTextField emailTextField;
+    private TextField emailTextField;
 
     @FXML
-    private JFXPasswordField passwordTextField;
+    private PasswordField passwordTextField;
 
     @FXML
-    private JFXTextField passTextField;
+    private TextField textPasswordField;
 
     @FXML
-    private JFXCheckBox showPassCheckBox;
+    private CheckBox showPassCheckBox;
     @FXML
     private StackPane rootStackPane;
 
@@ -135,24 +139,14 @@ public class signUpController
     /*---------------------------------------------------------------------------------*/
     public void showPassword()
     {
-        if (showPassCheckBox.isSelected())
-        {
-            if (!passwordTextField.getText().isEmpty())
-            {
-                passTextField.setText(passwordTextField.getText());
-            }
-            passTextField.setVisible(true);
+        if (showPassCheckBox.isSelected()) {
+            textPasswordField.setText(passwordTextField.getText());
+            textPasswordField.setVisible(true);
             passwordTextField.setVisible(false);
-        }
-        else
-        {
-            if (!passTextField.getText().isEmpty())
-            {
-                passwordTextField.setText(passTextField.getText());
-            }
-
+        } else {
+            passwordTextField.setText(textPasswordField.getText());
             passwordTextField.setVisible(true);
-            passTextField.setVisible(false);
+            textPasswordField.setVisible(false);
         }
 
     }
@@ -189,5 +183,30 @@ public class signUpController
         download.setFill(Color.valueOf("#ffffff"));
         snackbar = new JFXSnackbar(rootStackPane) ;
         snackbar.fireEvent( new JFXSnackbar.SnackbarEvent(download));
+    }
+
+    public void Clear(ActionEvent actionEvent) {
+        usernameTextField.clear();
+        emailTextField.clear();
+        passwordTextField.clear();
+        textPasswordField.clear();
+    }
+
+    public void Back(ActionEvent actionEvent) {
+        try {
+            // Tải FXML của màn hình đăng ký
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ca/chatappcs4/FXML/DangNhap.fxml"));
+            Parent signupRoot = loader.load();
+
+            // Lấy cửa sổ hiện tại (Stage)
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            // Cài đặt Scene mới cho cửa sổ
+            Scene scene = new Scene(signupRoot);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
