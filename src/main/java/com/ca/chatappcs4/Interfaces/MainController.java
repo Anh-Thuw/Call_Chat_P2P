@@ -1049,6 +1049,8 @@ public class MainController  implements Initializable
 
     @FXML
     private JFXButton vedioCallBtn;
+    ImageView myimage ;
+    ImageView user2 ;
 
     @FXML
     void VedioCall(ActionEvent event) throws IOException
@@ -1071,9 +1073,19 @@ public class MainController  implements Initializable
         imageView.setFitWidth(550);
         imageView.setFitHeight(300);
 
-        ImageView myimage = new ImageView() ;
-        myimage.setX(115);
+        // Your video
+        myimage = new ImageView();
+        myimage.setX(50);
         myimage.setY(30);
+        myimage.setFitWidth(200);
+        myimage.setFitHeight(150);
+
+        // User2's video
+        user2 = new ImageView();
+        user2.setX(300);
+        user2.setY(30);
+        user2.setFitWidth(200);
+        user2.setFitHeight(150);
 
         Text endCall = GlyphsDude.createIcon(FontAwesomeIconName.PHONE,"2em") ;
         endCall.setFill(Color.WHITE);
@@ -1088,7 +1100,7 @@ public class MainController  implements Initializable
         button.setLayoutX(250);
         button.setLayoutY(235);
         //pane.getChildren().addAll(imageView,myimage,button) ;
-        pane.getChildren().addAll(imageView,myimage,button) ;
+        pane.getChildren().addAll(imageView, myimage, user2, button);
 
 
         final Dimension size = WebcamResolution.QVGA.getSize();
@@ -1141,7 +1153,7 @@ public class MainController  implements Initializable
         });
 
         /*---------------------------------------Recive THread------------------------------*/
-        /*Thread reciveThread = new Thread(()->
+        Thread reciveThread = new Thread(()->
         {
             BufferedImage bufferedImage;
             while (VedioCalling)
@@ -1174,7 +1186,7 @@ public class MainController  implements Initializable
                 e.printStackTrace();
             }
         });
-        reciveThread.start();*/
+        reciveThread.start();
         sendVideo.start();
         /*----------------------------------------------------------------------------*/
     }
@@ -1290,23 +1302,16 @@ public class MainController  implements Initializable
                 {
                     ImageIcon ic;
                     bufferedImage = webcam.getImage();
-                    if (bufferedImage == null) {
-                        System.err.println("Webcam image is null");
-                        continue;
-                    }
-                    Image picture = SwingFXUtils.toFXImage(bufferedImage, null);
-                    Platform.runLater(() -> myimage.setImage(picture));
+                    Image picture = SwingFXUtils.toFXImage(bufferedImage,null);
+                    myimage.setImage(picture);
                     ic = new ImageIcon(bufferedImage);
                     try
                     {
                         objectOutputStream.writeObject(ic);
-                        Thread.sleep(33);
                     }
                     catch (IOException e)
                     {
                         VedioCalling = false ;
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
                     }
 
                 }
