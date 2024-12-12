@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class serveurMt extends Thread
+public class Server extends Thread
 {
     public static AtomicInteger nbrClients = new AtomicInteger(0);
 
     public static void main(String[] args)
     {
-        new serveurMt().start();
+        new Server().start();
     }
 
 
