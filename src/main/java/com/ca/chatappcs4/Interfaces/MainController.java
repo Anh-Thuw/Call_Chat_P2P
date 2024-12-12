@@ -1075,52 +1075,70 @@ public class MainController  implements Initializable
 
         VedioCalling =true ;
 
-
         Stage primaryStage = new Stage();
         Pane pane = new Pane();
-        pane.setPrefHeight(651.0);
+        pane.setPrefHeight(400.0);
         pane.setPrefWidth(858.0);
-        pane.setStyle("-fx-background-color: transparent; -fx-background-radius: 45px;");
+        pane.setStyle("-fx-background-color: #F0F0F0; -fx-background-radius: 15px;");
 
-// Hình ảnh của người dùng 1 (myimage)
         myimage = new ImageView();
         myimage.setX(50);
-        myimage.setY(50);  // Đặt vị trí cho hình ảnh myimage
-        myimage.setFitWidth(200);
-        myimage.setFitHeight(150);
+        myimage.setY(60);
+        myimage.setFitWidth(350);
+        myimage.setFitHeight(200);
+        myimage.setStyle("-fx-border-color: #4CAF50; -fx-border-width: 5px; -fx-background-radius: 15px;");
 
         user2 = new ImageView();
-        user2.setX(300);  // Đặt vị trí cho hình ảnh user2
-        user2.setY(50);
-        user2.setFitWidth(200);
-        user2.setFitHeight(150);
+        user2.setX(450);
+        user2.setY(60);
+        user2.setFitWidth(350);
+        user2.setFitHeight(200);
+        user2.setStyle("-fx-border-color: #FF9800; -fx-border-width: 5px; -fx-background-radius: 15px;");
 
-        // Nút kết thúc cuộc gọi (btnEnd)
+        Label timeLabel = new Label();
+        timeLabel.setText("Thời gian: " + java.time.LocalTime.now().withSecond(0).withNano(0)); // Lấy thời gian hiện tại
+        timeLabel.setStyle("-fx-text-fill: black;");
+        timeLabel.setLayoutX(50);
+        timeLabel.setLayoutY(300);
+
         Text endCall = GlyphsDude.createIcon(FontAwesomeIconName.PHONE, "2em");
         endCall.setFill(Color.WHITE);
         btnEnd = new JFXButton();
         btnEnd.setStyle("-fx-background-color: #E9505B; -fx-background-radius: 20px");
         btnEnd.setPrefSize(50, 50);
         btnEnd.setGraphic(endCall);
-        btnEnd.setLayoutX(400);  // Canh giữa nút
-        btnEnd.setLayoutY(500);  // Đặt vị trí gần dưới cùng
+        btnEnd.setLayoutX(350);
+        btnEnd.setLayoutY(300);
 
-        // Nút cuộc gọi âm thanh (audioCallBtn)
-        audioCallBtn = new JFXButton("Audio Call");
+        Text micSlash = GlyphsDude.createIcon(FontAwesomeIconName.MICROPHONE_SLASH, "2em");
+        micSlash.setFill(Color.WHITE);
+        audioCallBtn = new JFXButton();
         audioCallBtn.setStyle("-fx-background-color: #4CAF50; -fx-background-radius: 20px; -fx-text-fill: white;");
-        audioCallBtn.setPrefSize(100, 40);
-        audioCallBtn.setLayoutX(350);  // Canh giữa nút
-        audioCallBtn.setLayoutY(550);  // Đặt vị trí gần dưới cùng
+        audioCallBtn.setPrefSize(50, 50);
+        audioCallBtn.setGraphic(micSlash);
+        audioCallBtn.setLayoutX(450);  // Canh giữa nút (đặt vị trí theo chiều ngang)
+        audioCallBtn.setLayoutY(300);  // Đặt vị trí gần dưới cùng
 
         audioCallBtn.setOnMouseClicked(e -> {
             try {
-                AudioCall(new ActionEvent());
+                Text mic = GlyphsDude.createIcon(FontAwesomeIconName.MICROPHONE, "2em");
+                mic.setFill(Color.WHITE);
+                audioCallBtn.setGraphic(mic);
+
+                AudioCall(new ActionEvent() , audioCallBtn );
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         });
 
-        pane.getChildren().addAll(myimage, user2, btnEnd, audioCallBtn);
+// Thêm các phần tử vào pane
+        pane.getChildren().addAll(myimage, user2, btnEnd, audioCallBtn, timeLabel);
+
+// Đưa pane vào scene và hiển thị
+        Scene scene = new Scene(pane);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Cuộc Họp Video");
+        primaryStage.show();
 
 
         final Dimension size = WebcamResolution.QVGA.getSize();
@@ -1135,13 +1153,6 @@ public class MainController  implements Initializable
             webcam.close() ;
         });
 
-
-        primaryStage.setTitle("Hello World");
-        Scene scene = new Scene(pane) ;
-        scene.setFill(Color.TRANSPARENT);
-        primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.show();
         Thread sendVideo = new Thread(()->
         {
             BufferedImage bufferedImage;
@@ -1259,68 +1270,80 @@ public class MainController  implements Initializable
 //                webcam.setViewSize(size);
 //                webcam.open();
 
-                primaryStage = new Stage() ;
-                Pane pane =  new Pane() ;
-                ImageView imageView =new ImageView(new Image(getClass().getResource("/com/ca/chatappcs4/image/tabletmocup.png").toExternalForm()));
-                imageView.setFitWidth(550);
-                imageView.setFitHeight(300);
 
-                // Your video
+                VedioCalling =true ;
+
+                Stage primaryStage = new Stage();
+                Pane pane = new Pane();
+                pane.setPrefHeight(400.0);
+                pane.setPrefWidth(858.0);
+                pane.setStyle("-fx-background-color: #F0F0F0; -fx-background-radius: 15px;");
+
                 myimage = new ImageView();
                 myimage.setX(50);
-                myimage.setY(30);
-                myimage.setFitWidth(200);
-                myimage.setFitHeight(150);
+                myimage.setY(60);
+                myimage.setFitWidth(350);
+                myimage.setFitHeight(200);
+                myimage.setStyle("-fx-border-color: #4CAF50; -fx-border-width: 5px; -fx-background-radius: 15px;");
 
-                // User2's video
                 user2 = new ImageView();
-                user2.setX(300);
-                user2.setY(30);
-                user2.setFitWidth(200);
-                user2.setFitHeight(150);
+                user2.setX(450);
+                user2.setY(60);
+                user2.setFitWidth(350);
+                user2.setFitHeight(200);
+                user2.setStyle("-fx-border-color: #FF9800; -fx-border-width: 5px; -fx-background-radius: 15px;");
 
+                Label timeLabel = new Label();
+                timeLabel.setText("Thời gian: " + java.time.LocalTime.now().withSecond(0).withNano(0)); // Lấy thời gian hiện tại
+                timeLabel.setStyle("-fx-text-fill: black;");
+                timeLabel.setLayoutX(50);
+                timeLabel.setLayoutY(300);
 
-                // End Call Button
                 Text endCall = GlyphsDude.createIcon(FontAwesomeIconName.PHONE, "2em");
                 endCall.setFill(Color.WHITE);
                 btnEnd = new JFXButton();
                 btnEnd.setStyle("-fx-background-color: #E9505B; -fx-background-radius: 20px");
                 btnEnd.setPrefSize(50, 50);
                 btnEnd.setGraphic(endCall);
-                btnEnd.setLayoutX(250);
-                btnEnd.setLayoutY(235);
+                btnEnd.setLayoutX(350);
+                btnEnd.setLayoutY(300);
+
+                Text micSlash = GlyphsDude.createIcon(FontAwesomeIconName.MICROPHONE_SLASH, "2em");
+                micSlash.setFill(Color.WHITE);
+                audioCallBtn = new JFXButton();
+                audioCallBtn.setStyle("-fx-background-color: #4CAF50; -fx-background-radius: 20px; -fx-text-fill: white;");
+                audioCallBtn.setPrefSize(50, 50);
+                audioCallBtn.setGraphic(micSlash);
+                audioCallBtn.setLayoutX(450);  // Canh giữa nút (đặt vị trí theo chiều ngang)
+                audioCallBtn.setLayoutY(300);  // Đặt vị trí gần dưới cùng
+
+                audioCallBtn.setOnMouseClicked(e -> {
+                    try {
+                        Text mic = GlyphsDude.createIcon(FontAwesomeIconName.MICROPHONE, "2em");
+                        mic.setFill(Color.WHITE);
+                        audioCallBtn.setGraphic(mic);
+
+                        AudioCall(new ActionEvent() , audioCallBtn );
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+
+// Thêm các phần tử vào pane
+                pane.getChildren().addAll(myimage, user2, btnEnd, audioCallBtn, timeLabel);
+
+// Đưa pane vào scene và hiển thị
+                Scene scene = new Scene(pane);
+                primaryStage.setScene(scene);
+                primaryStage.setTitle("Cuộc Họp Video");
+                primaryStage.show();
+
                 btnEnd.setOnMouseClicked(e ->
                 {
                     VedioCalling=false ;
                     primaryStage.close();
                     webcam.close() ;
                 });
-
-                // Audio Call Button
-                audioCallBtn = new JFXButton("Audio Call");
-                audioCallBtn.setStyle("-fx-background-color: #4CAF50; -fx-background-radius: 20px; -fx-text-fill: white;");
-                audioCallBtn.setPrefSize(100, 40);
-                audioCallBtn.setLayoutX(400);
-                audioCallBtn.setLayoutY(235);
-                audioCallBtn.setOnMouseClicked(e -> {
-                    try {
-                        AudioCall(new ActionEvent());
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                });
-
-
-                pane.setStyle("-fx-background-radius: 45px; -fx-background-color: transparent");
-                pane.getChildren().addAll(imageView, myimage, user2, btnEnd, audioCallBtn);
-
-
-                primaryStage.setTitle("Hello World");
-                Scene scene = new Scene(pane) ;
-                scene.setFill(Color.TRANSPARENT);
-                primaryStage.setScene(scene);
-                primaryStage.initStyle(StageStyle.TRANSPARENT);
-                primaryStage.show();
 
             });
 
@@ -1410,7 +1433,7 @@ public class MainController  implements Initializable
     /*--------------------------------------------------------------------------------*/
 
     @FXML
-    void AudioCall(ActionEvent event) throws IOException
+    void AudioCall(ActionEvent event , JFXButton audioCallBtn ) throws IOException
     {
         String ip = chatSocket.getInetAddress().getHostAddress();
         int port = portUser2 ;
@@ -1422,66 +1445,39 @@ public class MainController  implements Initializable
         oos.writeObject(4);
 
         /*--------------------------------*/
-        Stage primaryStage = new Stage() ;
-        Pane pane =  new Pane() ;
-        ImageView imageView = new ImageView(new Image(getClass().getResource("/com/ca/chatappcs4/image/phonemocup.png").toExternalForm()));
-        imageView.setFitWidth(300);
-        imageView.setFitHeight(550);
 
-        ImageView voice = new ImageView(new Image(getClass().getResource("/com/ca/chatappcs4/image/voicerecored.png").toExternalForm()));
-        voice.setFitWidth(250);
-        voice.setFitHeight(80);
-        voice.setX(25);
-        voice.setY(200);
-
-        ImageView micro = new ImageView(new Image(getClass().getResource("/com/ca/chatappcs4/image/microphone.png").toExternalForm()));
-        micro.setX(70);
-        micro.setY(70);
-
-
-        Text endCall = GlyphsDude.createIcon(FontAwesomeIconName.PHONE,"2em") ;
-        endCall.setFill(Color.WHITE);
-        JFXButton button = new JFXButton() ;
-
-        button.setOnMouseClicked(e ->
+        audioCallBtn.setOnMouseClicked(e ->
         {
-            Calling = false ;
-            primaryStage.close();
-            try
-            {
-                socketAudio.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            if (Calling) {
+                // Nếu đang gọi, tắt mic
+                Calling = false;
+                Text micSlash = GlyphsDude.createIcon(FontAwesomeIconName.MICROPHONE_SLASH, "2em");
+                micSlash.setFill(Color.WHITE);
+                audioCallBtn.setGraphic(micSlash);
+
+                try {
+                    socketAudio.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                // Nếu không gọi, bật mic
+                Calling = true;
+                Text mic = GlyphsDude.createIcon(FontAwesomeIconName.MICROPHONE, "2em");
+                mic.setFill(Color.WHITE);
+                audioCallBtn.setGraphic(mic);
+
+                Thread sendVoice = new Thread(() -> {
+                    iniAudioClient(ip,port);
+                }) ;
+                sendVoice.start();
+                Thread reciveVoice = new Thread(() -> {
+                    iniAudioServer(MyPort);
+                }) ;
+                reciveVoice.start();
             }
+
         });
-        button.setStyle("-fx-background-color: #E9505B ; -fx-background-radius: 20px");
-        button.setPrefSize(50,50);
-        pane.setStyle("-fx-background-radius: 45px ; -fx-background-color: transparent");
-
-        button.setGraphic(endCall);
-        button.setLayoutX(125);
-        button.setLayoutY(390);
-        pane.getChildren().addAll(imageView,micro,voice,button) ;
-
-        primaryStage.setTitle("Hello World");
-        Scene scene = new Scene(pane) ;
-        scene.setFill(Color.TRANSPARENT);
-        primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setResizable(true);
-        primaryStage.setX(80);
-        primaryStage.setY(100);
-
-        primaryStage.show();
-        Thread sendVoice = new Thread(() -> {
-            iniAudioClient(ip,port);
-        }) ;
-        sendVoice.start();
-        Thread reciveVoice = new Thread(() -> {
-            iniAudioServer(MyPort);
-        }) ;
-        reciveVoice.start();
-
         /*--------------------------------*/
 
     }
