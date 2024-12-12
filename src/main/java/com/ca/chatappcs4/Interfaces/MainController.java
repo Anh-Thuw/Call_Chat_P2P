@@ -21,6 +21,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
@@ -112,29 +113,34 @@ public class MainController  implements Initializable
 //        barChartFile.getData().addAll(set1) ;
 
         nombreUser.setText(countUsers()+" Peer");
-        nombreRess.setText(countRess()+" Resource");
+       // nombreRess.setText(countRess()+" Resource");
     }
     /*--------------------------------------------------------------------------------**/
     @FXML
-    void About()
-    {
-
-        BoxBlur boxBlur = new BoxBlur(3,3,3) ;
-        JFXButton Okey = new JFXButton("Okey") ;
-        JFXDialogLayout layout = new JFXDialogLayout() ;
-        ImageView imageView = new ImageView(new Image("/org/example/chatapp/image/Logo.png",50,50,true,false)) ;
-
-
-        Okey.getStyleClass().add("dialogButtonYes") ;
-        layout.setActions(Okey);
-        layout.setBody(new Text("be Peer  \n\nIdea of : Dr.Lemia Louail \nDeveloped by : Chahrazed Benrebbouh \n\nCopyright (C) 2020-2021 "));
+    void About() {
+        BoxBlur boxBlur = new BoxBlur(5, 5, 3);
+        JFXButton Okey = new JFXButton("OK");
+        Okey.getStyleClass().add("dialogButtonYes");
+        JFXDialogLayout layout = new JFXDialogLayout();
+        ImageView imageView = new ImageView(new Image(getClass().getResource("/com/ca/chatappcs4/image/Logo.png").toExternalForm()));
+        imageView.setFitWidth(70);
+        imageView.setFitHeight(70);
+        imageView.setPreserveRatio(true);
+        VBox contentBox = new VBox(10);
+        contentBox.setAlignment(Pos.CENTER);
+        contentBox.getChildren().addAll(
+                new Text("MEET THE TEAM"),
+                new Text("Developed by:\nNguyen Anh Thu")
+        );
+        contentBox.getStyleClass().add("dialogContent");
         layout.setHeading(imageView);
-        JFXDialog dialog = new JFXDialog(rootStackPane,layout,JFXDialog.DialogTransition.TOP) ;
+        layout.setBody(contentBox);
+        layout.setActions(Okey);
+        JFXDialog dialog = new JFXDialog(rootStackPane, layout, JFXDialog.DialogTransition.TOP);
         dialog.show();
         rootAnchorPane.setEffect(boxBlur);
-        Okey.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseevnt) ->
-        {
-            rootAnchorPane.setEffect(null);
+        Okey.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent) -> {
+            rootAnchorPane.setEffect(null); // Gỡ bỏ hiệu ứng mờ
             dialog.close();
         });
     }
@@ -144,10 +150,10 @@ public class MainController  implements Initializable
     public void initialize(URL location, ResourceBundle resources)
     {
         userFentre.setText(username);
-        homeIcon.setFill(Paint.valueOf("#151928"));
-        homeBtn.getStyleClass().add("btn");
+      //  homeIcon.setFill(Paint.valueOf("#151928"));
+       // homeBtn.getStyleClass().add("btn");
 
-        AudioCallBtn.setDisable(true);
+       // AudioCallBtn.setDisable(true);
         vedioCallBtn.setDisable(true);
 
 
@@ -301,32 +307,32 @@ public class MainController  implements Initializable
 
     /*-------FXML component---------*/
     @FXML
-    public FontAwesomeIcon homeIcon;
-    public JFXButton homeBtn;
-    public Pane HomePane;
+  //  public FontAwesomeIcon homeIcon;
+   // public JFXButton homeBtn;
+   // public Pane HomePane;
     public BarChart<?, ?> barChartFile;
     public Text nombreUser;
-    public Text nombreRess;
+   // public Text nombreRess;
     /*-------------------------------*/
 
     /*-------------------------------List Of Function -----------------------------------------------*/
-    @FXML
-    void ShowHomePane()
-    {
-        HomePane.setVisible(true);
-        ShearPane.setVisible(false);
-        ChatsPane.setVisible(false);
-
-        homeIcon.setFill(Paint.valueOf("#151928"));
-        homeBtn.getStyleClass().removeAll("btn");
-        homeBtn.getStyleClass().add("btn") ;
-
-        shearicon.setFill(Paint.valueOf("#ffffff"));
-        shearBtn.getStyleClass().removeAll("btn");
-
-        imageMessanger.setImage(new Image(getClass().getResource("/com/ca/chatappcs4/image/messenger.png").toExternalForm()));
-        mssengerBtn.getStyleClass().removeAll ("btn-not");
-    }
+//    @FXML
+//    void ShowHomePane()
+//    {
+//        HomePane.setVisible(true);
+//        ShearPane.setVisible(false);
+//        ChatsPane.setVisible(false);
+//
+//        homeIcon.setFill(Paint.valueOf("#151928"));
+//        homeBtn.getStyleClass().removeAll("btn");
+//        homeBtn.getStyleClass().add("btn") ;
+//
+//        shearicon.setFill(Paint.valueOf("#ffffff"));
+//        shearBtn.getStyleClass().removeAll("btn");
+//
+//        imageMessanger.setImage(new Image(getClass().getResource("/com/ca/chatappcs4/image/messenger.png").toExternalForm()));
+//        mssengerBtn.getStyleClass().removeAll ("btn-not");
+//    }
     /*-------count the number of occurrences for each file-------*/
     public Vector<file> count()
     {
@@ -415,15 +421,15 @@ public class MainController  implements Initializable
     void ShowShearPane()
     {
         ShearPane.setVisible(true);
-        HomePane.setVisible(false);
+      //  HomePane.setVisible(false);
         ChatsPane.setVisible(false);
 
         shearicon.setFill(Paint.valueOf("#151928"));
         shearBtn.getStyleClass().removeAll() ;
         shearBtn.getStyleClass().add("btn") ;
 
-        homeIcon.setFill(Paint.valueOf("#ffffff"));
-        homeBtn.getStyleClass().removeAll("btn");
+     //   homeIcon.setFill(Paint.valueOf("#ffffff"));
+      //  homeBtn.getStyleClass().removeAll("btn");
 
         imageMessanger.setImage(new Image(getClass().getResource("/com/ca/chatappcs4/image/Logo.png").toExternalForm()));
         mssengerBtn.getStyleClass().removeAll("btn-not");
@@ -691,7 +697,7 @@ public class MainController  implements Initializable
     public Label message;
     public JFXButton sendButton;
     public TextField textFielMessage;
-    public Label usernameLabel;
+   // public Label usernameLabel;
     public JFXListView<String> list;
     public ImageView vectorImage;
 
@@ -705,25 +711,25 @@ public class MainController  implements Initializable
     void ShowChatsPane()
     {
         ChatsPane.setVisible(true);
-        HomePane.setVisible(false);
+   //     HomePane.setVisible(false);
         ShearPane.setVisible(false);
 
         imageMessanger.setImage(new Image(getClass().getResource("/com/ca/chatappcs4/image/messengerd.png").toExternalForm()));
         mssengerBtn.getStyleClass().removeAll("btn") ;
         mssengerBtn.getStyleClass().add("btn-not") ;
 
-        homeIcon.setFill(Paint.valueOf("#ffffff"));
-        homeBtn.getStyleClass().removeAll("btn");
+       // homeIcon.setFill(Paint.valueOf("#ffffff"));
+      //  homeBtn.getStyleClass().removeAll("btn");
 
         shearicon.setFill(Paint.valueOf("#ffffff"));
         shearBtn.getStyleClass().removeAll("btn");
     }
     /*-------------------------------Quit Chat ---------------------------*/
-    @FXML
-    void quitChat(ActionEvent event)
-    {
-
-    }
+//    @FXML
+//    void quitChat(ActionEvent event)
+//    {
+//
+//    }
     /*-----------------Get list of users from server-------------------*/
     public ObservableList<String> getListUser()
     {
@@ -834,14 +840,14 @@ public class MainController  implements Initializable
 
                 if (reponse.equals("true"))
                 {
-                    AudioCallBtn.setDisable(false);
+                   // AudioCallBtn.setDisable(false);
                     vedioCallBtn.setDisable(false);
                     vectorImage.setVisible(false);
                     message.setTextFill(Paint.valueOf("#4af225"));
                     message.setText("You have now joined the conversation with " + contact + " !" +
                             " \n Enjoy chatting !");
                     textFielMessage.setEditable(true);
-                    usernameLabel.setText(contact);
+                   // usernameLabel.setText(contact);
 
                     /*-------------------Recive Thread -----------------------*/
                     Thread recive = new Thread(() ->
@@ -981,7 +987,7 @@ public class MainController  implements Initializable
             message.setText("You have now joined the conversation with " + contact + " !" +
                     " \n Enjoy chatting !");
             textFielMessage.setEditable(true);
-            usernameLabel.setText(contact);
+           // usernameLabel.setText(contact);
         });
     }
     /*----------------------Chat Class ----------------------------------*/
@@ -1004,7 +1010,7 @@ public class MainController  implements Initializable
         @Override
         public void run()
         {
-            AudioCallBtn.setDisable(false);
+          //  AudioCallBtn.setDisable(false);
             vedioCallBtn.setDisable(false);
             vectorImage.setVisible(false);
             chatSocket = s ;
@@ -1048,7 +1054,7 @@ public class MainController  implements Initializable
      ******************************************************************************************************************/
 
     @FXML
-    private JFXButton vedioCallBtn;
+    private Button vedioCallBtn;
     ImageView myimage ;
     ImageView user2 ;
     JFXButton btnEnd , audioCallBtn ;
@@ -1068,42 +1074,44 @@ public class MainController  implements Initializable
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
         VedioCalling =true ;
-        Stage primaryStage = new Stage() ;
-        Pane pane =  new Pane() ;
-        ImageView imageView = new ImageView(new Image(getClass().getResource("/com/ca/chatappcs4/image/tabletmocup.png").toExternalForm())); ;
-        imageView.setFitWidth(550);
-        imageView.setFitHeight(300);
 
-        // Your video
+
+        Stage primaryStage = new Stage();
+        Pane pane = new Pane();
+        pane.setPrefHeight(651.0);
+        pane.setPrefWidth(858.0);
+        pane.setStyle("-fx-background-color: transparent; -fx-background-radius: 45px;");
+
+// Hình ảnh của người dùng 1 (myimage)
         myimage = new ImageView();
         myimage.setX(50);
-        myimage.setY(30);
+        myimage.setY(50);  // Đặt vị trí cho hình ảnh myimage
         myimage.setFitWidth(200);
         myimage.setFitHeight(150);
 
-        // User2's video
         user2 = new ImageView();
-        user2.setX(300);
-        user2.setY(30);
+        user2.setX(300);  // Đặt vị trí cho hình ảnh user2
+        user2.setY(50);
         user2.setFitWidth(200);
         user2.setFitHeight(150);
 
-        // End Call Button
+        // Nút kết thúc cuộc gọi (btnEnd)
         Text endCall = GlyphsDude.createIcon(FontAwesomeIconName.PHONE, "2em");
         endCall.setFill(Color.WHITE);
         btnEnd = new JFXButton();
         btnEnd.setStyle("-fx-background-color: #E9505B; -fx-background-radius: 20px");
         btnEnd.setPrefSize(50, 50);
         btnEnd.setGraphic(endCall);
-        btnEnd.setLayoutX(250);
-        btnEnd.setLayoutY(235);
+        btnEnd.setLayoutX(400);  // Canh giữa nút
+        btnEnd.setLayoutY(500);  // Đặt vị trí gần dưới cùng
 
-        // Audio Call Button
+        // Nút cuộc gọi âm thanh (audioCallBtn)
         audioCallBtn = new JFXButton("Audio Call");
         audioCallBtn.setStyle("-fx-background-color: #4CAF50; -fx-background-radius: 20px; -fx-text-fill: white;");
         audioCallBtn.setPrefSize(100, 40);
-        audioCallBtn.setLayoutX(400);
-        audioCallBtn.setLayoutY(235);
+        audioCallBtn.setLayoutX(350);  // Canh giữa nút
+        audioCallBtn.setLayoutY(550);  // Đặt vị trí gần dưới cùng
+
         audioCallBtn.setOnMouseClicked(e -> {
             try {
                 AudioCall(new ActionEvent());
@@ -1112,8 +1120,7 @@ public class MainController  implements Initializable
             }
         });
 
-        pane.setStyle("-fx-background-radius: 45px; -fx-background-color: transparent");
-        pane.getChildren().addAll(imageView, myimage, user2, btnEnd , audioCallBtn);
+        pane.getChildren().addAll(myimage, user2, btnEnd, audioCallBtn);
 
 
         final Dimension size = WebcamResolution.QVGA.getSize();
@@ -1397,8 +1404,8 @@ public class MainController  implements Initializable
      *                                                   Audio Call                                                    *
      *                                                                                                                 *
      ******************************************************************************************************************/
-    @FXML
-    private JFXButton AudioCallBtn;
+//    @FXML
+//    private JFXButton AudioCallBtn;
 
     /*--------------------------------------------------------------------------------*/
 

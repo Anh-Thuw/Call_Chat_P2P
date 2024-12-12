@@ -28,12 +28,12 @@
                   </Label>
                   <ImageView fitHeight="88.0" fitWidth="93.0" layoutX="462.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/Logo.jpg" />
+                        <Image url="@../image/Logo.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="88.0" fitWidth="93.0" layoutX="82.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/Logo.jpg" />
+                        <Image url="@../image/Logo.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="198.0" layoutY="96.0" text="Hoàng Vanh" textFill="WHITE">

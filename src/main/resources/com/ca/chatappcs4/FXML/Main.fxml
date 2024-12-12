@@ -25,86 +25,66 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.Button?>
 <StackPane fx:id="rootStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="633.0" prefWidth="873.0" stylesheets="@../CSS/fullpackstyling.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ca.chatappcs4.Interfaces.MainController">
     <children>
 <AnchorPane fx:id="rootAnchorPane" prefHeight="651.0" prefWidth="858.0" styleClass="AnchorPane" stylesheets="@../CSS/fullpackstyling.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+<!--
       <Pane fx:id="HomePane" layoutX="64.0" layoutY="48.0" prefHeight="558.0" prefWidth="772.0" style="-fx-background-radius: 20;" styleClass="PaneMain" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="48.0">
          <children>
-<!--                  <BarChart fx:id="barChartFile" layoutX="7.0" layoutY="215.0" legendSide="RIGHT" legendVisible="false" prefHeight="333.0" prefWidth="747.0" title="">-->
-<!--                    <xAxis>-->
-<!--                      <CategoryAxis label="" onMouseEntered="#popover" side="BOTTOM" tickLabelGap="5.0" tickLength="4.0" fx:id="x" />-->
-<!--                    </xAxis>-->
-<!--                    <yAxis>-->
-<!--                      <NumberAxis fx:id="y" label="" side="LEFT" upperBound="10.0" />-->
-<!--                    </yAxis>-->
-<!--                  </BarChart>-->
-                  <Pane fx:id="ProduitIndicatNbr" layoutX="67.0" layoutY="48.0" prefHeight="100.0" prefWidth="163.0" styleClass="paneHome">
-                     <children>
-                        <ImageView fitHeight="56.0" fitWidth="59.0" layoutX="54.0" layoutY="-27.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/Cercle2.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="62.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/Cercle1.png" />
-                           </image>
-                        </ImageView>
-                        <FontAwesomeIcon iconName="USER" layoutX="74.0" layoutY="7.0" size="1.5em" />
-                        <Text fx:id="nombreUser" fill="WHITE" layoutX="22.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="107.90771484375">
-                           <font>
-                              <Font name="System Bold Italic" size="15.0" />
-                           </font>
-                        </Text>
-                     </children>
-                     <effect>
-                        <DropShadow blurType="GAUSSIAN" color="#a19c9c" height="19.61" offsetX="5.0" offsetY="4.0" radius="8.895" width="17.97" />
-                     </effect>
-                  </Pane>
-                  <Pane fx:id="ProduitIndicatNbr1" layoutX="319.0" layoutY="48.0" prefHeight="100.0" prefWidth="163.0" styleClass="paneHome">
-                     <children>
-                        <ImageView fitHeight="56.0" fitWidth="59.0" layoutX="54.0" layoutY="-27.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/Cercle2.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="62.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/Cercle1.png" />
-                           </image>
-                        </ImageView>
-                        <FontAwesomeIcon iconName="FILE" layoutX="75.0" layoutY="6.0" size="1.5em" />
-                        <Text fx:id="nombreRess" fill="WHITE" layoutX="18.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="128.90771484375">
-                           <font>
-                              <Font name="System Bold Italic" size="15.0" />
-                           </font>
-                        </Text>
-                     </children>
-                     <effect>
-                        <DropShadow blurType="GAUSSIAN" color="#a19c9c" height="19.61" offsetX="5.0" offsetY="4.0" radius="8.895" width="17.97" />
-                     </effect>
-                  </Pane>
-                  <Pane fx:id="ProduitIndicatNbr11" layoutX="564.0" layoutY="48.0" prefHeight="100.0" prefWidth="163.0" styleClass="paneHome">
-                     <children>
-                        <ImageView fitHeight="56.0" fitWidth="59.0" layoutX="54.0" layoutY="-27.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/Cercle2.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="62.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/Cercle1.png" />
-                           </image>
-                        </ImageView>
-                        <FontAwesomeIcon layoutX="75.0" layoutY="6.0" />
-                     </children>
-                     <effect>
-                        <DropShadow blurType="GAUSSIAN" color="#a19c9c" height="19.61" offsetX="5.0" offsetY="4.0" radius="8.895" width="17.97" />
-                     </effect>
-                  </Pane>
-                  <Separator layoutX="63.0" layoutY="180.0" prefHeight="3.0" prefWidth="671.0" />
-         </children></Pane>
+            &lt;!&ndash; Pane User &ndash;&gt;
+            <Pane fx:id="ProduitIndicatNbr" layoutX="67.0" layoutY="150.0" prefHeight="100.0" prefWidth="163.0" styleClass="paneHome">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="59.0" layoutX="54.0" layoutY="-27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Cercle2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="62.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Cercle1.png" />
+                     </image>
+                  </ImageView>
+                  <FontAwesomeIcon iconName="USER" layoutX="74.0" layoutY="7.0" size="1.5em" />
+                  <Text fx:id="nombreUser" fill="WHITE" layoutX="22.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="107.90771484375">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" color="#a19c9c" height="19.61" offsetX="5.0" offsetY="4.0" radius="8.895" width="17.97" />
+               </effect>
+            </Pane>
+
+            &lt;!&ndash; Pane Resource &ndash;&gt;
+            <Pane fx:id="ProduitIndicatNbr1" layoutX="319.0" layoutY="150.0" prefHeight="100.0" prefWidth="163.0" styleClass="paneHome">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="59.0" layoutX="54.0" layoutY="-27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Cercle2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="62.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/Cercle1.png" />
+                     </image>
+                  </ImageView>
+                  <FontAwesomeIcon iconName="FILE" layoutX="75.0" layoutY="6.0" size="1.5em" />
+                  <Text fx:id="nombreRess" fill="WHITE" layoutX="18.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="128.90771484375">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" color="#a19c9c" height="19.61" offsetX="5.0" offsetY="4.0" radius="8.895" width="17.97" />
+               </effect>
+            </Pane>
+         </children>
+      </Pane>
+-->
       <Pane fx:id="ShearPane" layoutX="64.0" prefHeight="558.0" prefWidth="772.0" styleClass="PaneMain" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="48.0">
          <children>
             <JFXTextField fx:id="SearchField" focusColor="#1d3566" layoutX="134.0" layoutY="22.0" prefHeight="42.0" prefWidth="539.0" promptText="Search File" styleClass="SearchBar" unFocusColor="WHITE">
@@ -187,7 +167,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane fx:id="ChatsPane" layoutX="64.0" layoutY="42.0" prefHeight="558.0" prefWidth="772.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="48.0">
+      <Pane fx:id="ChatsPane" layoutX="64.0" layoutY="42.0" prefHeight="558.0" prefWidth="772.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;" styleClass="PaneMain" visible="true" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="48.0">
          <children>
                   <Pane layoutX="270.0" layoutY="49.0" prefHeight="523.0" prefWidth="502.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 0 0 20 0;" />
             <ScrollPane layoutX="270.0" layoutY="90.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="412.0" prefWidth="493.0" style="-fx-border-color: #f4f4f4;">
@@ -219,7 +199,8 @@
                         <Separator layoutX="265.0" orientation="VERTICAL" prefHeight="572.0" prefWidth="3.0" />
                      </children>
                   </Pane>
-            <Text layoutX="87.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chats">
+
+            <Text fx:id="nombreUser" layoutX="87.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="24.0" />
                </font>
@@ -227,33 +208,31 @@
             <Separator layoutX="20.0" layoutY="76.0" prefHeight="3.0" prefWidth="219.0" />
                   <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="272.0" layoutY="55.0" prefHeight="33.0" prefWidth="475.0" text=" " textAlignment="CENTER" />
                   <ImageView fx:id="vectorImage" fitHeight="406.0" fitWidth="493.0" layoutX="275.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
+                <!--     <image>
                         <Image url="@../image/5351.png" />
-                     </image>
+                     </image>-->
                   </ImageView>
             <Pane layoutX="268.0" prefHeight="49.0" prefWidth="504.0" style="-fx-background-color: #fff; -fx-background-radius: 0 15 0 0;">
                <children>
-                  <JFXButton fx:id="vedioCallBtn" contentDisplay="CENTER" layoutX="452.0" layoutY="12.0" onAction="#VedioCall" text=" ">
-                     <graphic>
-                        <FontAwesomeIcon fill="#2196f3" iconName="VIDEO_CAMERA" size="1.2em" />
-                     </graphic>
-                  </JFXButton>
-                  <Separator layoutX="443.0" layoutY="3.0" orientation="VERTICAL" prefHeight="41.0" prefWidth="3.0" />
+                  <Button fx:id="vedioCallBtn" contentDisplay="CENTER" layoutX="350.0" layoutY="12.0" onAction="#VedioCall" text="Tạo cuộc họp tức thì" style="-fx-background-color: #4682B4; -fx-text-fill: white; "/>
+
+<!--                  <Separator layoutX="443.0" layoutY="3.0" orientation="VERTICAL" prefHeight="41.0" prefWidth="3.0" />-->
 <!--                  <JFXButton fx:id="AudioCallBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="402.0" layoutY="10.0" onAction="#AudioCall" prefHeight="28.0" prefWidth="38.0" text=" ">-->
 <!--                     <graphic>-->
 <!--                        <FontAwesomeIcon fill="#2196f3" iconName="PHONE" size="1.2em" />-->
 <!--                     </graphic>-->
 <!--                  </JFXButton>-->
-                  <Separator layoutX="393.0" layoutY="4.0" orientation="VERTICAL" prefHeight="41.0" prefWidth="3.0" />
-                        <Label fx:id="usernameLabel" layoutX="69.0" layoutY="17.0" prefHeight="16.0" prefWidth="260.0">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font></Label>
-                        <JFXButton fx:id="quitChat" layoutX="7.0" layoutY="14.0" onAction="#quitChat" text=" ">
-                           <graphic>
-                              <FontAwesomeIcon fill="#2196f3" iconName="ARROW_LEFT" size="1.5em" />
-                           </graphic>
-                        </JFXButton>
+<!--                  <Separator layoutX="393.0" layoutY="4.0" orientation="VERTICAL" prefHeight="41.0" prefWidth="3.0" />-->
+<!--                        <Label fx:id="usernameLabel" layoutX="69.0" layoutY="17.0" prefHeight="16.0" prefWidth="260.0">-->
+<!--                           <font>-->
+<!--                              <Font name="System Bold" size="13.0" />-->
+<!--                           </font>-->
+<!--                        </Label>-->
+<!--                        <JFXButton fx:id="quitChat" layoutX="7.0" layoutY="14.0" onAction="#quitChat" text=" ">-->
+<!--                           <graphic>-->
+<!--                              <FontAwesomeIcon fill="#2196f3" iconName="ARROW_LEFT" size="1.5em" />-->
+<!--                           </graphic>-->
+<!--                        </JFXButton>-->
                </children>
                      <effect>
                         <DropShadow blurType="TWO_PASS_BOX" offsetX="5.0" />
@@ -268,22 +247,14 @@
       </Pane>
       <VBox alignment="TOP_CENTER" layoutY="144.0" prefHeight="463.0" prefWidth="89.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="784.0" AnchorPane.topAnchor="144.0">
          <children>
-            <JFXButton fx:id="homeBtn" alignment="CENTER" onAction="#ShowHomePane" prefHeight="50.0" prefWidth="76.0" styleClass="shearBrn" text=" ">
+            <!--<JFXButton fx:id="homeBtn" alignment="CENTER" prefHeight="50.0" prefWidth="76.0" styleClass="shearBrn" text=" ">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
                <graphic>
                   <FontAwesomeIcon fx:id="homeIcon" fill="WHITE" iconName="HOME" selectionFill="#77e1da" size="2.2em" styleClass="icon" />
                </graphic>
-            </JFXButton>
-            <JFXButton fx:id="shearBtn" alignment="CENTER" onAction="#ShowShearPane" prefHeight="50.0" prefWidth="76.0" styleClass="shearBrn" text=" ">
-               <graphic>
-                  <FontAwesomeIcon fx:id="shearicon" fill="WHITE" iconName="SHARE" selectionFill="#77e1da" size="2em" styleClass="icon" />
-               </graphic>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </JFXButton>
+            </JFXButton>-->
             <JFXButton fx:id="mssengerBtn" alignment="CENTER" onAction="#ShowChatsPane" prefHeight="50.0" prefWidth="76.0" styleClass="menuBtn" text=" ">
                <graphic>
                   <ImageView fx:id="imageMessanger" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
@@ -293,14 +264,24 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-                  <JFXButton onAction="#About" prefHeight="50.0" prefWidth="76.0" text=" ">
-                     <graphic>
-                        <FontAwesomeIcon fill="WHITE" iconName="QUESTION" size="2em" />
-                     </graphic>
-                     <VBox.margin>
-                        <Insets top="120.0" />
-                     </VBox.margin>
-                  </JFXButton>
+
+            <JFXButton fx:id="shearBtn" alignment="CENTER" onAction="#ShowShearPane" prefHeight="50.0" prefWidth="76.0" styleClass="shearBrn" text=" ">
+               <graphic>
+                  <FontAwesomeIcon fx:id="shearicon" fill="WHITE" iconName="SHARE" selectionFill="#77e1da" size="2em" styleClass="icon" />
+               </graphic>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </JFXButton>
+
+            <JFXButton onAction="#About" prefHeight="50.0" prefWidth="76.0" text=" ">
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" iconName="QUESTION" size="2em" />
+               </graphic>
+               <VBox.margin>
+                  <Insets top="120.0" />
+               </VBox.margin>
+            </JFXButton>
             <JFXButton alignment="CENTER" onAction="#LogOut" prefHeight="50.0" prefWidth="76.0" text=" ">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" iconName="SIGN_OUT" rotate="180.0" size="2em" />
@@ -323,7 +304,7 @@
                     "4.0" prefHeight="41.0" prefWidth="228.0" textFill="WHITE" />
             <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="19.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/Logo.jpg" />
+                  <Image url="@../image/Logo.png" />
                </image>
             </ImageView>
    </children>
