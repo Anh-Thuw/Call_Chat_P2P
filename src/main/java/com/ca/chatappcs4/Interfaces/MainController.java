@@ -1153,9 +1153,9 @@ public class MainController  implements Initializable
         Thread sendVideo = new Thread(()->
         {
             final Dimension size = WebcamResolution.QVGA.getSize();
-//                Webcam webcam = Webcam.getDefault();
-//                webcam.setViewSize(size);
-//                webcam.open();
+                Webcam webcam = Webcam.getDefault();
+                webcam.setViewSize(size);
+                webcam.open();
             BufferedImage bufferedImage;
             while (VedioCalling)
             {
