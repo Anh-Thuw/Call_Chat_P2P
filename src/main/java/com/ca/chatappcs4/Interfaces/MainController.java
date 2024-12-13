@@ -1058,6 +1058,7 @@ public class MainController  implements Initializable
     ImageView myimage ;
     ImageView user2 ;
     JFXButton btnEnd , audioCallBtn ;
+    Webcam webcam = Webcam.getDefault();
 
     @FXML
     void VedioCall(ActionEvent event) throws IOException
@@ -1110,6 +1111,7 @@ public class MainController  implements Initializable
         btnEnd.setLayoutX(350);
         btnEnd.setLayoutY(300);
 
+
         Text micSlash = GlyphsDude.createIcon(FontAwesomeIconName.MICROPHONE_SLASH, "2em");
         micSlash.setFill(Color.WHITE);
         audioCallBtn = new JFXButton();
@@ -1140,12 +1142,6 @@ public class MainController  implements Initializable
         primaryStage.setTitle("Cuộc Họp Video");
         primaryStage.show();
 
-
-        final Dimension size = WebcamResolution.QVGA.getSize();
-        Webcam webcam = Webcam.getDefault();
-        webcam.setViewSize(size);
-
-    //    webcam.open();
         btnEnd.setOnMouseClicked(e ->
         {
             VedioCalling=false ;
@@ -1153,8 +1149,13 @@ public class MainController  implements Initializable
             webcam.close() ;
         });
 
+
         Thread sendVideo = new Thread(()->
         {
+            final Dimension size = WebcamResolution.QVGA.getSize();
+//                Webcam webcam = Webcam.getDefault();
+//                webcam.setViewSize(size);
+//                webcam.open();
             BufferedImage bufferedImage;
             while (VedioCalling)
             {
