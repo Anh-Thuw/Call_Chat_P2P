@@ -1145,8 +1145,8 @@ public class MainController  implements Initializable
         final Dimension size = WebcamResolution.QVGA.getSize();
         Webcam webcam = Webcam.getDefault();
         webcam.setViewSize(size);
-
         webcam.open();
+
         btnEnd.setOnMouseClicked(e ->
         {
             VedioCalling=false ;
@@ -1157,10 +1157,6 @@ public class MainController  implements Initializable
 
         Thread sendVideo = new Thread(()->
         {
- //           final Dimension size = WebcamResolution.QVGA.getSize();
-//                Webcam webcam = Webcam.getDefault();
-//                webcam.setViewSize(size);
-//                webcam.open();
             BufferedImage bufferedImage;
             while (VedioCalling)
             {
@@ -1270,13 +1266,6 @@ public class MainController  implements Initializable
 
             Platform.runLater(()->
             {
-//                if (webcam.isOpen()) {
-//                    webcam.close();
-//                }
-//                webcam.setViewSize(size);
-//                webcam.open();
-
-
                 VedioCalling =true ;
 
                 Stage primaryStage = new Stage();
@@ -1355,10 +1344,6 @@ public class MainController  implements Initializable
 
             Thread sendVideo = new Thread(()->
             {
-//                final Dimension size = WebcamResolution.QVGA.getSize();
-//                Webcam webcam = Webcam.getDefault();
-//                webcam.setViewSize(size);
-//                webcam.open();
                 BufferedImage bufferedImage;
                 while (VedioCalling)
                 {
