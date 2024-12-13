@@ -46,7 +46,7 @@
                 <CheckBox fx:id="showPassCheckBox" onAction="#showPassword" text="Show Password" textFill="BLACK" style="-fx-font-size: 14;" />
 
                 <!-- Login Button -->
-                <Button onAction="#SignIn" prefHeight="40.0" prefWidth="300.0" text="Sign Ip" style="-fx-background-color: #4682B4; -fx-text-fill: white; -fx-font-size: 16;" />
+                <Button onAction="#SignIn" prefHeight="40.0" prefWidth="300.0" text="Sign In" style="-fx-background-color: #4682B4; -fx-text-fill: white; -fx-font-size: 16;" />
 
                 <!-- Signup Section -->
                 <Label text="Bạn đã có tài khoản chưa?" textFill="BLACK" style="-fx-font-size: 14;" />

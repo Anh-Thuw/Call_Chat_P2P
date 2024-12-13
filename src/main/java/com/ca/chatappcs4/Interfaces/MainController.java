@@ -1145,7 +1145,7 @@ public class MainController  implements Initializable
         Webcam webcam = Webcam.getDefault();
         webcam.setViewSize(size);
 
-        webcam.open();
+    //    webcam.open();
         btnEnd.setOnMouseClicked(e ->
         {
             VedioCalling=false ;
