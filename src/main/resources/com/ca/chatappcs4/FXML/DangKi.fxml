@@ -25,7 +25,7 @@
                 <!-- Username Row -->
                 <HBox spacing="10.0" prefWidth="500.0" alignment="CENTER">
                     <children>
-                        <Label text="Tên đăng nhập:" textFill="#000000" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-size: 16;" />
+                        <Label text="Username:" textFill="#000000" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-size: 16;" />
                         <TextField fx:id="usernameTextField" prefHeight="30.0" prefWidth="300.0" promptText="Nhập tên đăng nhập" style="-fx-font-size: 16;" />
                     </children>
                 </HBox>
@@ -41,7 +41,7 @@
                 <!-- Password Row -->
                 <HBox alignment="CENTER" spacing="10.0" prefWidth="500.0">
                     <children>
-                        <Label text="Mật khẩu:" textFill="#000000" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-size: 16;" />
+                        <Label text="Password:" textFill="#000000" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-size: 16;" />
                         <!-- StackPane để chồng 2 ô TextField và PasswordField -->
                         <StackPane>
                             <children>
@@ -59,13 +59,13 @@
                 <HBox spacing="10.0" alignment="CENTER">
                     <children>
                         <!-- Back Button -->
-                        <Button onAction="#Back" prefHeight="40.0" prefWidth="120.0" text="Quay lại" style="-fx-background-color: #DC143C; -fx-text-fill: white; -fx-font-size: 16;" />
+                        <Button onAction="#Back" prefHeight="40.0" prefWidth="120.0" text="Back" style="-fx-background-color: #DC143C; -fx-text-fill: white; -fx-font-size: 16;" />
 
                         <!-- Clear Button -->
                         <Button onAction="#Clear" prefHeight="40.0" prefWidth="120.0" text="Clear" style="-fx-background-color: #32CD32; -fx-text-fill: white; -fx-font-size: 16;" />
 
                         <!-- Register Button -->
-                        <Button onAction="#SignUp" prefHeight="40.0" prefWidth="120.0" text="Đăng kí" style="-fx-background-color: #4682B4; -fx-text-fill: white; -fx-font-size: 16;" />
+                        <Button onAction="#SignUp" prefHeight="40.0" prefWidth="120.0" text="SignUp" style="-fx-background-color: #4682B4; -fx-text-fill: white; -fx-font-size: 16;" />
 
                         <!-- Settings Button -->
                         <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#Setting" prefHeight="44.0" prefWidth="70.0" text=" " style="-fx-background-color: transparent; -fx-padding: 0; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 5, 0.5, 1, 1);">

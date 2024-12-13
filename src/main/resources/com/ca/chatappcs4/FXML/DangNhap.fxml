@@ -24,20 +24,20 @@
                 <!-- Username Row -->
                 <HBox spacing="10.0" prefWidth="500.0" alignment="CENTER">
                     <children>
-                        <Label text="Tên đăng nhập:" textFill="#000000" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-size: 16;" />
-                        <TextField fx:id="usernameTextField" prefHeight="30.0" prefWidth="300.0" promptText="Nhập tên đăng nhập" style="-fx-font-size: 16;" />
+                        <Label text="Username:" textFill="#000000" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-size: 16;" />
+                        <TextField fx:id="usernameTextField" prefHeight="30.0" prefWidth="300.0" promptText="Enter username" style="-fx-font-size: 16;" />
                     </children>
                 </HBox>
 
                 <!-- Password Row -->
                 <HBox alignment="CENTER" spacing="10.0" prefWidth="500.0">
                     <children>
-                        <Label text="Mật khẩu:" textFill="#000000" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-size: 16;" />
+                        <Label text="Password:" textFill="#000000" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-size: 16;" />
                         <!-- StackPane để chồng 2 ô TextField và PasswordField -->
                         <StackPane>
                             <children>
-                                <PasswordField fx:id="passwordTextField" prefHeight="30.0" prefWidth="300.0" promptText="Nhập mật khẩu" style="-fx-font-size: 16;" visible="true" />
-                                <TextField fx:id="textPasswordField" prefHeight="30.0" prefWidth="300.0" promptText="Nhập mật khẩu" style="-fx-font-size: 16;" visible="false" />
+                                <PasswordField fx:id="passwordTextField" prefHeight="30.0" prefWidth="300.0" promptText="Enter password" style="-fx-font-size: 16;" visible="true" />
+                                <TextField fx:id="textPasswordField" prefHeight="30.0" prefWidth="300.0" promptText="Enter password" style="-fx-font-size: 16;" visible="false" />
                             </children>
                         </StackPane>
                     </children>
@@ -46,11 +46,11 @@
                 <CheckBox fx:id="showPassCheckBox" onAction="#showPassword" text="Show Password" textFill="BLACK" style="-fx-font-size: 14;" />
 
                 <!-- Login Button -->
-                <Button onAction="#SignIn" prefHeight="40.0" prefWidth="300.0" text="Đăng nhập" style="-fx-background-color: #4682B4; -fx-text-fill: white; -fx-font-size: 16;" />
+                <Button onAction="#SignIn" prefHeight="40.0" prefWidth="300.0" text="Sign Ip" style="-fx-background-color: #4682B4; -fx-text-fill: white; -fx-font-size: 16;" />
 
                 <!-- Signup Section -->
                 <Label text="Bạn đã có tài khoản chưa?" textFill="BLACK" style="-fx-font-size: 14;" />
-                <Button onAction="#open_signup" prefHeight="40.0" prefWidth="300.0" text="Đăng kí" style="-fx-background-color: #32CD32; -fx-text-fill: white; -fx-font-size: 16;" />
+                <Button onAction="#open_signup" prefHeight="40.0" prefWidth="300.0" text="Sign Up" style="-fx-background-color: #32CD32; -fx-text-fill: white; -fx-font-size: 16;" />
             </children>
         </VBox>
     </children>
