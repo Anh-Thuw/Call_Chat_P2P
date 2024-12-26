@@ -1120,17 +1120,9 @@ public class MainController  implements Initializable
         audioCallBtn.setLayoutX(450);  // Canh giữa nút (đặt vị trí theo chiều ngang)
         audioCallBtn.setLayoutY(300);  // Đặt vị trí gần dưới cùng
 
-        audioCallBtn.setOnMouseClicked(e -> {
-            try {
-                Text mic = GlyphsDude.createIcon(FontAwesomeIconName.MICROPHONE, "2em");
-                mic.setFill(Color.WHITE);
-                audioCallBtn.setGraphic(mic);
 
-                AudioCall(new ActionEvent() , audioCallBtn );
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+        AudioCall(new ActionEvent() , audioCallBtn );
+
 
 // Thêm các phần tử vào pane
         pane.getChildren().addAll(myimage, user2, btnEnd, audioCallBtn, timeLabel);
@@ -1138,7 +1130,7 @@ public class MainController  implements Initializable
 // Đưa pane vào scene và hiển thị
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Cuộc Họp Video");
+        primaryStage.setTitle("Video Meeting");
         primaryStage.show();
 
         final Dimension size = WebcamResolution.QVGA.getSize();
@@ -1266,7 +1258,7 @@ public class MainController  implements Initializable
             {
                 VedioCalling =true ;
 
-                Stage primaryStage = new Stage();
+                primaryStage = new Stage();
                 Pane pane = new Pane();
                 pane.setPrefHeight(400.0);
                 pane.setPrefWidth(858.0);
@@ -1310,17 +1302,13 @@ public class MainController  implements Initializable
                 audioCallBtn.setLayoutX(450);  // Canh giữa nút (đặt vị trí theo chiều ngang)
                 audioCallBtn.setLayoutY(300);  // Đặt vị trí gần dưới cùng
 
-                audioCallBtn.setOnMouseClicked(e -> {
-                    try {
-                        Text mic = GlyphsDude.createIcon(FontAwesomeIconName.MICROPHONE, "2em");
-                        mic.setFill(Color.WHITE);
-                        audioCallBtn.setGraphic(mic);
 
-                        AudioCall(new ActionEvent() , audioCallBtn );
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                });
+                try {
+                    AudioCall(new ActionEvent() , audioCallBtn );
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
 
 // Thêm các phần tử vào pane
                 pane.getChildren().addAll(myimage, user2, btnEnd, audioCallBtn, timeLabel);
@@ -1422,7 +1410,7 @@ public class MainController  implements Initializable
     /*--------------------------------------------------------------------------------*/
 
     @FXML
-    void AudioCall(ActionEvent event , JFXButton audioCallBtn ) throws IOException
+    void AudioCall(ActionEvent event ,JFXButton audioCallBtn) throws IOException
     {
         String ip = chatSocket.getInetAddress().getHostAddress();
         int port = portUser2 ;
@@ -1432,95 +1420,87 @@ public class MainController  implements Initializable
 
         ObjectOutputStream oos = new ObjectOutputStream(socketAudio.getOutputStream());
         oos.writeObject(4);
-
         /*--------------------------------*/
-
-        audioCallBtn.setOnMouseClicked(e ->
-        {
-            if (Calling) {
-                // Nếu đang gọi, tắt mic
-                Calling = false;
+        audioCallBtn.setOnMouseClicked(e -> {
+            if (Radio) {
+                // Tắt mic
+                Radio = false;
                 Text micSlash = GlyphsDude.createIcon(FontAwesomeIconName.MICROPHONE_SLASH, "2em");
                 micSlash.setFill(Color.WHITE);
                 audioCallBtn.setGraphic(micSlash);
 
                 try {
-                    socketAudio.close();
+                    if (socketAudio != null && !socketAudio.isClosed()) {
+                        socketAudio.close();
+                    }
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             } else {
-                // Nếu không gọi, bật mic
-                Calling = true;
+                // Bật mic
+                Radio = true;
                 Text mic = GlyphsDude.createIcon(FontAwesomeIconName.MICROPHONE, "2em");
                 mic.setFill(Color.WHITE);
                 audioCallBtn.setGraphic(mic);
 
-                Thread sendVoice = new Thread(() -> {
-                    iniAudioClient(ip,port);
-                }) ;
-                sendVoice.start();
-                Thread reciveVoice = new Thread(() -> {
-                    iniAudioServer(MyPort);
-                }) ;
-                reciveVoice.start();
-            }
+                iniAudioClient(ip, port);
+                //   iniAudioServer(MyPort);
 
+            }
         });
+
         /*--------------------------------*/
 
     }
     public void iniAudioClient(String ip ,int port)
     {
-        AudioFormat format = getaudioFormat() ;
-        DataLine.Info info= new DataLine.Info(TargetDataLine.class,format) ;
-        if (!AudioSystem.isLineSupported(info))
-        {
-            System.out.println("not supported");
-            System.exit(0);
-        }
-        try
-        {
-            audio_in = (TargetDataLine) AudioSystem.getLine(info) ;
-            audio_in.open(format);
-            audio_in.start();
-            record_Thread r = new record_Thread();
-            InetAddress inet = InetAddress.getByName(ip) ;
-            r.audio_in = audio_in ;
-            r.dout = new DatagramSocket() ;
-            r.server_ip = inet ;
-            r.server_port = port ;
-            Calling = true ;
-            r.start();
-        } catch (LineUnavailableException | UnknownHostException | SocketException e) {
-            e.printStackTrace();
-        }
+        new Thread(() -> {
+            AudioFormat format = getaudioFormat();
+            DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
+            if (!AudioSystem.isLineSupported(info)) {
+                System.out.println("not supported");
+                System.exit(0);
+            }
+            try {
+                audio_in = (TargetDataLine) AudioSystem.getLine(info);
+                audio_in.open(format);
+                audio_in.start();
+                record_Thread r = new record_Thread();
+                InetAddress inet = InetAddress.getByName(ip);
+                r.audio_in = audio_in;
+                r.dout = new DatagramSocket();
+                r.server_ip = inet;
+                r.server_port = port;
+                Radio = true ;
+                r.start();
+            } catch (LineUnavailableException | UnknownHostException | SocketException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
     public void iniAudioServer(int port)
     {
-        SourceDataLine audio_in ;
-        AudioFormat format = getaudioFormat() ;
-        DataLine.Info info_out = new DataLine.Info(SourceDataLine.class,format) ;
-        if (!AudioSystem.isLineSupported(info_out))
-        {
-            System.out.println("not supported");
-            System.exit(0);
-        }
-        try
-        {
-            audio_in = (SourceDataLine) AudioSystem.getLine(info_out) ;
-            audio_in.open(format);
-            audio_in.start();
-            player_thread p = new player_thread() ;
-            p.din = new DatagramSocket(port) ;
-            p.audio_out = audio_in ;
-            Calling = true ;
-            p.start();
-        }
-        catch (LineUnavailableException | SocketException e)
-        {
-            e.printStackTrace();
-        }
+        new Thread(() -> {
+            SourceDataLine audio_in;
+            AudioFormat format = getaudioFormat();
+            DataLine.Info info_out = new DataLine.Info(SourceDataLine.class, format);
+            if (!AudioSystem.isLineSupported(info_out)) {
+                System.out.println("not supported");
+                System.exit(0);
+            }
+            try {
+                audio_in = (SourceDataLine) AudioSystem.getLine(info_out);
+                audio_in.open(format);
+                audio_in.start();
+                player_thread p = new player_thread();
+                p.din = new DatagramSocket(port);
+                p.audio_out = audio_in;
+                Radio = true ;
+                p.start();
+            } catch (LineUnavailableException | SocketException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     public  class AudioCall  implements Runnable
@@ -1529,7 +1509,6 @@ public class MainController  implements Initializable
 
         public AudioCall(Socket s)
         {
-            System.out.println("from constactor ");
             this.s = s;
         }
 
@@ -1544,59 +1523,10 @@ public class MainController  implements Initializable
             {
                 String ip = chatSocket.getInetAddress().getHostAddress() ;
                 int port = portUser2 ;
-                Stage primaryStage = new Stage() ;
-                Pane pane =  new Pane() ;
-                ImageView imageView = new ImageView(new Image(getClass().getResource("/com/ca/chatappcs4/image/phonemocup.png").toExternalForm()));
 
-                imageView.setFitWidth(300);
-                imageView.setFitHeight(550);
+                iniAudioServer(MyPort);
+                //   iniAudioClient(ip,port);
 
-                ImageView voice = new ImageView(new Image(getClass().getResource("/com/ca/chatappcs4/image/voicerecored.png").toExternalForm()));
-                voice.setFitWidth(250);
-                voice.setFitHeight(80);
-                voice.setX(25);
-                voice.setY(200);
-
-                ImageView micro = new ImageView(new Image(getClass().getResource("/com/ca/chatappcs4/image/microphone.png").toExternalForm()));
-                micro.setX(70);
-
-                micro.setY(70);
-
-
-                Text endCall = GlyphsDude.createIcon(FontAwesomeIconName.PHONE,"2em") ;
-                endCall.setFill(Color.WHITE);
-                JFXButton button = new JFXButton() ;
-
-                button.setOnMouseClicked(e -> {
-                    Calling = false ;
-                    primaryStage.close();
-                });
-                button.setStyle("-fx-background-color: #E9505B ; -fx-background-radius: 20px");
-                button.setPrefSize(50,50);
-                pane.setStyle("-fx-background-radius: 45px ; -fx-background-color: transparent");
-
-                button.setGraphic(endCall);
-                button.setLayoutX(125);
-                button.setLayoutY(390);
-                pane.getChildren().addAll(imageView,micro,voice,button) ;
-
-                primaryStage.setTitle("Hello World");
-                Scene scene = new Scene(pane) ;
-                scene.setFill(Color.TRANSPARENT);
-                primaryStage.setScene(scene);
-                primaryStage.initStyle(StageStyle.TRANSPARENT);
-                primaryStage.setResizable(true);
-                primaryStage.setX(80);
-                primaryStage.setY(100);
-                primaryStage.show();
-                Thread reciveVoice = new Thread(() -> {
-                    iniAudioServer(MyPort);
-                });
-                reciveVoice.start();
-                Thread sendVoice = new Thread(() -> {
-                    iniAudioClient(ip,port);
-                });
-                sendVoice.start();
             });
         }
     }
@@ -1612,8 +1542,7 @@ public class MainController  implements Initializable
         return new AudioFormat(simpleRate,simpleSireInbits,channel,signed,bigIndian) ;
     }
     TargetDataLine  audio_in ;
-    public static boolean Calling = false ;
+    public static boolean Radio = false ;
     public static boolean VedioCalling = false ;
 
 }
-

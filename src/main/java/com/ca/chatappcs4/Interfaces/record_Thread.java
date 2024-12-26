@@ -17,7 +17,7 @@ public class record_Thread extends Thread {
     @Override
     public void run() {
         int i = 0;
-        while (MainController.Calling)
+        while (MainController.Radio)
         {
             if (audio_in.available() >=1200) { //we got enough data to send
                 byte[] byte_buffer = new byte[1200];

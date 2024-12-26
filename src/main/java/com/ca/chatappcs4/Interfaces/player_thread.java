@@ -19,7 +19,7 @@ public class player_thread extends Thread
     {
         int i = 0 ;
         DatagramPacket incoming =  new DatagramPacket(byte_buffer,byte_buffer.length) ;
-        while (MainController.Calling)
+        while (MainController.Radio)
         {
 
             try

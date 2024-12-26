@@ -214,7 +214,7 @@
                   </ImageView>
             <Pane layoutX="268.0" prefHeight="49.0" prefWidth="504.0" style="-fx-background-color: #fff; -fx-background-radius: 0 15 0 0;">
                <children>
-                  <Button fx:id="vedioCallBtn" contentDisplay="CENTER" layoutX="350.0" layoutY="12.0" onAction="#VedioCall" text="Tạo cuộc họp tức thì" style="-fx-background-color: #4682B4; -fx-text-fill: white; "/>
+                  <Button fx:id="vedioCallBtn" contentDisplay="CENTER" layoutX="350.0" layoutY="12.0" onAction="#VedioCall" text="Create a meeting now" style="-fx-background-color: #4682B4; -fx-text-fill: white; "/>
 
 <!--                  <Separator layoutX="443.0" layoutY="3.0" orientation="VERTICAL" prefHeight="41.0" prefWidth="3.0" />-->
 <!--                  <JFXButton fx:id="AudioCallBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="402.0" layoutY="10.0" onAction="#AudioCall" prefHeight="28.0" prefWidth="38.0" text=" ">-->
